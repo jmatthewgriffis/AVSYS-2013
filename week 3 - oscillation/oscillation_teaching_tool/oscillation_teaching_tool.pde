@@ -31,13 +31,19 @@ void setup() {
 void draw() {
 
   background(125);
+  
+  // Show the screen count and arrow cues:
+    fill(255);
+    if (gameState > 1) {
+      text("<--", 25, height-10);
+    }
+    if (gameState < totalSlides) {
+      text("-->", width-25, height-10);
+    }
+    text(gameState + "/" + totalSlides, centerW, height-10);
+    fill(0);
 
   if (gameState == 1) {
-    
-    // Show the screen count:
-    fill(255);
-    text(gameState + "/" + totalSlides, width-25, height-10);
-    fill(0);
     
     fill(0);
     text("Let's learn about oscillation.", centerW, centerH);
@@ -45,21 +51,11 @@ void draw() {
   
   if (gameState == 2) {
     
-    // Show the screen count:
-    fill(255);
-    text(gameState + "/" + totalSlides, width-25, height-10);
     fill(0);
-    
-    fill(0);
-    text("Oscillation is a scary term,\n\nbut it's not so bad.", centerW, centerH-25);
+    text("Oscillation is a scary term,\n\nbut it's not so bad.\n\nIt starts with a circle.", centerW, centerH-50);
   }
 
   if (gameState == 3) {
-    
-    // Show the screen count:
-    fill(255);
-    text(gameState + "/" + totalSlides, width-25, height-10);
-    fill(0);
 
     inc++;
     xPos = sin(inc/60) * rad;
