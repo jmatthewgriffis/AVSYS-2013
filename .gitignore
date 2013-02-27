@@ -1,5 +1,5 @@
 # Don't waste space and time backing up movie files
-.MOV
+*.MOV
 
 # Some general ignore patterns
 build/
