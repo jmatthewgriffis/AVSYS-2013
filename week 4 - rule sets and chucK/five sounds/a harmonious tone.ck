@@ -13,6 +13,10 @@
 // loop (which adjusts the gain) not coming into effect right away. I'd like to fix it but I don't
 // know how.
 
+// EDIT: I posted the question to the AVSYS group and Bernardo figured
+// out it was because I was leading with the time statement. By moving
+// that to after all the if statements, I resolved the issue. Thanks B!
+
 int counter;
 int delay;
 15 => delay;
@@ -34,13 +38,12 @@ SinOsc oscCu => dac;
 
 
 while( true ) {
+    
     counter ++;
     //<<<counter>>>; // Prints the value of the counter.
-    100::ms => now;
-    
 
-   // Delay the arrival of each note in the chord by manipulating the gain based on the counter:
-   if (counter < delay) {
+    // Delay the arrival of each note in the chord by manipulating the gain based on the counter:
+    if (counter < delay) {
         0 => oscE.gain;
     }
     else {
@@ -67,5 +70,7 @@ while( true ) {
     else {
         1 => oscCu.gain;
     }
+    
+    100::ms => now;
     
 }
