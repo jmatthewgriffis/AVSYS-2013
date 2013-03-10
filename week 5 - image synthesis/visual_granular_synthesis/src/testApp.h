@@ -20,12 +20,8 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
-    ofImage img1;
-    ofImage img2;
-    ofImage img3;
-    
     vector<myImage> myImages; // ArrayList of myImage-class objects.
     
-    myImage instance;
+    int maxImages;
     
 };

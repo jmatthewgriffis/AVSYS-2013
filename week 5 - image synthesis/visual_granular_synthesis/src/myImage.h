@@ -19,7 +19,7 @@ public: // This is important. Set this to public to allow access to the code
     // from outside the class. Set it to private to only allow access within
     // the class.
     
-    void setup(float x, float y, float w, float h);
+    void setup(float x, float y);
     void update();
     void draw();
     
@@ -31,6 +31,7 @@ public: // This is important. Set this to public to allow access to the code
     ofImage myPic;
     
     int displayWhich;
+    float imageReducer;
     
 };
 
