@@ -24,7 +24,7 @@ class testApp : public ofBaseApp{
     ofImage img2;
     ofImage img3;
     
-    vector<ofImage> myImages;
+    vector<myImage> myImages; // ArrayList of myImage-class objects.
     
     int displayWhich;
     
