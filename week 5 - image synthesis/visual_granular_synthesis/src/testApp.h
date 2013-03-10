@@ -26,8 +26,6 @@ class testApp : public ofBaseApp{
     
     vector<myImage> myImages; // ArrayList of myImage-class objects.
     
-    int displayWhich;
-    
     myImage instance;
 		
 };

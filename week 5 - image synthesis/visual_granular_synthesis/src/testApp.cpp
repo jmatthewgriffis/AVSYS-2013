@@ -2,51 +2,26 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-
-    img1.loadImage("pics/img1.jpg");
-    img2.loadImage("pics/img2.jpg");
-    img3.loadImage("pics/img3.jpg");
     
     ofSetRectMode(OF_RECTMODE_CENTER);
-    
-    displayWhich = int(ofRandom(2.1));
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    img1.update();
-    img2.update();
-    img3.update();
+    for (int i=0; i<myImages.size(); i++) {
+        myImages[i].update();
+    }
     
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    
-    /*
-    if (displayWhich == 0) {
-    img1.draw(ofGetWidth()/2, ofGetHeight()/2, 300, 300);
-    }
-    else if (displayWhich == 1) {
-        img2.draw(ofGetWidth()/2, ofGetHeight()/2, 300, 300);
-    }
-    else if (displayWhich == 2) {
-        img3.draw(ofGetWidth()/2, ofGetHeight()/2, 300, 300);
-    }
-     */
-    
-    /*for (int i=0; i<myImages.size(); i++) {
-        myImages[i].setup(mouseX, mouseY, 300,300);
-        //myImages[i].update(mouseX, mouseY);
-    }*/
 
     for (int i=0; i<myImages.size(); i++) {
         myImages[i].draw();
     }
-    
-    //instance.draw();
     
 }
 
@@ -75,14 +50,7 @@ void testApp::mousePressed(int x, int y, int button){
     
     myImage instance;
     instance.setup(mouseX, mouseY, 300,300);
-    //instance.setup(mouseX, mouseY, 300,300);
-    //instance.draw();
-    //instance.update();
-    /*instance.x = mouseX;
-    instance.y = mouseY;*/
     myImages.push_back(instance);
-    
-    //displayWhich = int(ofRandom(2.1));
 
 }
 
