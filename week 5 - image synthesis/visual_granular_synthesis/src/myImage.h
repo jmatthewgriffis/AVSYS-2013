@@ -32,6 +32,7 @@ public: // This is important. Set this to public to allow access to the code
     
     int displayWhich;
     float imageReducer;
+    int timeDelay;
     
 };
 

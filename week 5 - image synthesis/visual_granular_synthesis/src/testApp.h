@@ -20,6 +20,11 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    // Thanks to Zach for the gradient example. I modified it to fit the dimensions of this project:
+    // "
+    ofImage img;
+    // "
+    
     vector<myImage> myImages; // ArrayList of myImage-class objects.
     
     int maxImages;

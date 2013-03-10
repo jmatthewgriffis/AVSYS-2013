@@ -16,6 +16,8 @@ void myImage::setup(float _x, float _y) {
     
     imageReducer = 4.5;
     
+    timeDelay = 0;
+    
     // Use the random number to determine which picture is drawn:
     if (displayWhich == 0) {
         myPic.loadImage("pics/img1.jpg");
@@ -39,6 +41,13 @@ void myImage::setup(float _x, float _y) {
 }
 
 void myImage::update() {
+    
+    timeDelay++;
+    
+    if (timeDelay >= 120) {
+        x += 3;
+        y -= 2;
+    }
     
 }
 
