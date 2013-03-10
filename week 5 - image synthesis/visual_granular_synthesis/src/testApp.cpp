@@ -25,6 +25,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
+    /*
     if (displayWhich == 0) {
     img1.draw(ofGetWidth()/2, ofGetHeight()/2, 300, 300);
     }
@@ -34,8 +35,12 @@ void testApp::draw(){
     else if (displayWhich == 2) {
         img3.draw(ofGetWidth()/2, ofGetHeight()/2, 300, 300);
     }
+     */
 
-
+    for (int i=0; i<myImages.size(); i++) {
+        //myImages[i].draw(myImages[i].x, myImages[i].y);
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -61,7 +66,14 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     
-    displayWhich = int(ofRandom(2.1));
+    myImage instance;
+    instance.setup(mouseX, mouseY, 300,300);
+    instance.draw();
+    /*instance.x = mouseX;
+    instance.y = mouseY;*/
+    //myImages.push_back(instance);
+    
+    //displayWhich = int(ofRandom(2.1));
 
 }
 
