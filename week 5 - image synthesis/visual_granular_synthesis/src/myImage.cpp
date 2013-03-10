@@ -13,10 +13,10 @@
 void myImage::setup(float _x, float _y) {
     
     displayWhich = int(ofRandom(2.5)); // Pick a random int from 0 through 2.
-    
-    imageReducer = 4.5;
-    
-    timeDelay = 0;
+    imageReducer = 4.5; // Shrink the images (higher = smaller).
+    timeDelay = 0; // This is a counter to delay movement.
+    xVel = 3;
+    yVel = 2;
     
     // Use the random number to determine which picture is drawn:
     if (displayWhich == 0) {
@@ -42,11 +42,28 @@ void myImage::setup(float _x, float _y) {
 
 void myImage::update() {
     
-    timeDelay++;
+    if (timeDelay < 120) {
+        timeDelay++; // Add to the counter.
+    }
+    else { // If sufficient time has passed, modify the pos:
+        x += xVel;
+        y += yVel;
+    }
     
-    if (timeDelay >= 120) {
-        x += 3;
-        y -= 2;
+    // Prevent the images from going offscreen by reversing direction:
+    if (x <= 0 || x >= ofGetWidth()) {
+        xVel *= -1;
+    }
+    if (y <= 0 || y >= ofGetHeight()) {
+        yVel *= -1;
+    }
+    
+    moveWhen = int(ofRandom(250)); // Pick a random int from 0 through 5 and reverse direction on certain numbers:
+    if (moveWhen == 3) {
+        xVel *= -1;
+    }
+    if (moveWhen == 42) {
+        yVel *= -1;
     }
     
 }

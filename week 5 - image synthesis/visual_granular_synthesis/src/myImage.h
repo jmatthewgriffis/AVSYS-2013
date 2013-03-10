@@ -31,8 +31,11 @@ public: // This is important. Set this to public to allow access to the code
     ofImage myPic;
     
     int displayWhich;
+    int moveWhen;
     float imageReducer;
     int timeDelay;
+    int xVel;
+    int yVel;
     
 };
 
