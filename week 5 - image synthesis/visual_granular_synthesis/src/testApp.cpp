@@ -11,8 +11,6 @@ void testApp::setup(){
     
     displayWhich = int(ofRandom(2.1));
     
-    instance.setup(mouseX, mouseY, 300,300);
-    
 }
 
 //--------------------------------------------------------------
@@ -22,6 +20,7 @@ void testApp::update(){
     img2.update();
     img3.update();
     
+    instance.setup(mouseX, mouseY, 300,300);
     instance.update(mouseX, mouseY);
     
 }
@@ -72,15 +71,23 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     
-    //myImage instance;
+    myImage instance;
     //instance.setup(mouseX, mouseY, 300,300);
     //instance.draw();
     //instance.update();
     /*instance.x = mouseX;
     instance.y = mouseY;*/
-    //myImages.push_back(instance);
+    myImages.push_back(instance);
     
     //displayWhich = int(ofRandom(2.1));
+    
+    ofVec3f temp; // Instance of the ofVec3f object (a vector).
+    temp.x = x; // x, y and z are the names of the variables within
+    // the vector; however, they don't have to be the conventional
+    // x, y and z.
+    temp.y = y;
+    
+    pts.push_back(temp);
 
 }
 
