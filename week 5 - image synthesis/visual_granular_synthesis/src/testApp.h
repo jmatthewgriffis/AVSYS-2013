@@ -27,5 +27,7 @@ class testApp : public ofBaseApp{
     vector<ofImage> myImages;
     
     int displayWhich;
+    
+    myImage instance;
 		
 };

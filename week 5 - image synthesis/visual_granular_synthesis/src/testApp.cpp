@@ -11,6 +11,8 @@ void testApp::setup(){
     
     displayWhich = int(ofRandom(2.1));
     
+    instance.setup(mouseX, mouseY, 300,300);
+    
 }
 
 //--------------------------------------------------------------
@@ -19,6 +21,8 @@ void testApp::update(){
     img1.update();
     img2.update();
     img3.update();
+    
+    instance.update(mouseX, mouseY);
     
 }
 
@@ -40,6 +44,8 @@ void testApp::draw(){
     for (int i=0; i<myImages.size(); i++) {
         //myImages[i].draw(myImages[i].x, myImages[i].y);
     }
+    
+    instance.draw();
     
 }
 
@@ -66,9 +72,10 @@ void testApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     
-    myImage instance;
-    instance.setup(mouseX, mouseY, 300,300);
-    instance.draw();
+    //myImage instance;
+    //instance.setup(mouseX, mouseY, 300,300);
+    //instance.draw();
+    //instance.update();
     /*instance.x = mouseX;
     instance.y = mouseY;*/
     //myImages.push_back(instance);

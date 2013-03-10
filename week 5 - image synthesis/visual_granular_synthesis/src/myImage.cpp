@@ -20,9 +20,12 @@ void myImage::setup(float _x, float _y, float _w, float _h) {
     
 }
 
-void myImage::update() {
+void myImage::update(float _x, float _y) {
     
-    myPic.update();
+    //myPic.update();
+    
+    x = _x;
+    y = _y;
     
 }
 

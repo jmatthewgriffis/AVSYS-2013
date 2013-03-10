@@ -20,7 +20,7 @@ public: // This is important. Set this to public to allow access to the code
     // the class.
     
     void setup(float x, float y, float w, float h);
-    void update();
+    void update(float _x, float _y);
     void draw();
     
     float x;
