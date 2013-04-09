@@ -1,7 +1,7 @@
 #include "testApp.h"
 #include "stdio.h"
 
-/* This is Zach's first example using Aubio. I've modified it. */
+/* This is Zach's first example using Aubio. I believe it was originally labeled "Week6" rather than "Week8." I've modified it. */
 
 //--------------------------------------------------------------
 void testApp::setup(){
