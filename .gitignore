@@ -1,12 +1,6 @@
 # Don't waste space and time backing up media files
 *.zip
 *.MOV
-*.m4a
-*.mp3
-*.ogg
-*.JPG
-*.png
-*.ai
 
 # Some general ignore patterns
 build/
