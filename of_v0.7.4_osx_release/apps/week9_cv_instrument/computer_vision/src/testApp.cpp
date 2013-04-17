@@ -55,17 +55,17 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    //cam.draw(20,20);
+    cam.draw(20,20);
     colorImage.draw(360, 20);
-    //grayImage.draw(700, 20);
-    //bgImage.draw(20, 290);
-    //absDiffImage.draw(360,290);
-    //contourFinder.draw(720,290);
+    grayImage.draw(700, 20);
+    bgImage.draw(20, 290);
+    absDiffImage.draw(360,290);
+    contourFinder.draw(720,290);
     contourFinder.draw(360,20);
     
     ofSetColor(255, 0, 0);
     for(int i=0; i<contourFinder.nBlobs; i++) {
-        //ofCircle( contourFinder.blobs[i].centroid, 10 );
+        ofCircle( contourFinder.blobs[i].centroid, 10 );
     }
     ofSetColor(255);
     
