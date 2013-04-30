@@ -92,13 +92,33 @@ void testApp::update(){
     
     //if (sequencerPosition*32 >= xPos && sequencerPosition*32 <= xPos+length) yVel = -10; jump = false;
     
-    if (jump == true && yVel == 0) yVel = -10; jump = false;
-    
     // Check if the note below the white square is turned on:
+
+//    rectangle check...
+//    ofRectangle myRect;
+//    myRect.set( x,y,w,h);
+//    
+//    for (int i = 0; i < ...; i++){
+//        
+//    }
+    
+    float timeInJump = ofGetElapsedTimef() - jumpTime;
+    //cout << timeInJump << endl;
+    
     if(notes[checkXpos][checkYpos+1]){ //if a note is turned on
-        yVel = 0; // If so, stop movement.
+        if (timeInJump > 1.0) yVel = 0; // If so, stop movement.
         yPos = checkYpos*32;
     }
+    
+    cout << yVel << " " << jump <<  endl;
+    if (jump == true && fabs(yVel - 0) < 0.00001 ) {
+       printf("jump! \n");
+       yVel = -10;
+    }
+    
+    jump = false;
+    
+    
     
     //cout<<yVel<<' '<<jump<<endl;
 }
@@ -149,6 +169,7 @@ void testApp::keyPressed(int key){
         moveR = true;
     }
     if (key=='w') {
+        jumpTime = ofGetElapsedTimef();
         jump = true;
     }
 }

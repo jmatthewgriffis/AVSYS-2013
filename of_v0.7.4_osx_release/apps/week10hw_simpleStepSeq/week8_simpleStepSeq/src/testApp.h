@@ -54,6 +54,9 @@ class testApp : public ofBaseApp{
     float gravity;
     int checkXpos;
     int checkYpos;
+    
+    float jumpTime;
+    
 };
 
 #endif

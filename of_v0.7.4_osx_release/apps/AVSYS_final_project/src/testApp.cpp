@@ -28,6 +28,8 @@ void testApp::setup(){
     
     ofSetColor(0); // Make everything black, for now.
     
+    myAttack.setup(xPosPlayer, 50);
+    
 }
 
 //--------------------------------------------------------------
@@ -53,6 +55,8 @@ void testApp::update(){
         delayMoveCounter = 0;
     }
     
+    myAttack.update(yPosPlayer, moveRIGHT);
+    
 }
 
 //--------------------------------------------------------------
@@ -67,6 +71,8 @@ void testApp::draw(){
     
     // Draw the player:
     ofRect(xPosPlayer, yPosPlayer, widePlayer, tallPlayer);
+    
+    myAttack.draw();
     
 }
 

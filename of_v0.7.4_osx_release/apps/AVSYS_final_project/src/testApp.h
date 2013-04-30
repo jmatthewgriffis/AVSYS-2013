@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "attack.h"
 
 class testApp : public ofBaseApp{
     
@@ -37,5 +38,7 @@ public:
     bool allowMove; // Prevent persistent movement.
     float delayMoveCounter; // Limit movement frequency.
     float delayMoveTill; // Set the movement frequency.
+    
+    attack myAttack;
     
 };
