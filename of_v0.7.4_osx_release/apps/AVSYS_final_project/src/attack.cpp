@@ -24,7 +24,10 @@ void attack::setup(float xPosPlayer, float attackWide){
 //--------------------------------------------------------------
 void attack::update(float yPosPlayer, bool moveRIGHT){
     
-    iTossThePower = moveRIGHT;
+    checkMoveRIGHT = moveRIGHT;
+    
+    if (checkMoveRIGHT == true) iTossThePower = true;
+    
     if (iTossThePower == false) yPos = yPosPlayer;
     else xPos += xVel;
     

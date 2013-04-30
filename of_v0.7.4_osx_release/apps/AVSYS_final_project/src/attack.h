@@ -22,6 +22,7 @@ public:
     
     float xPos, yPos, wide, tall, xVel, attackSpacer;
     bool iTossThePower; // Does the player toss the power?
+    bool checkMoveRIGHT;
     
     
 };
