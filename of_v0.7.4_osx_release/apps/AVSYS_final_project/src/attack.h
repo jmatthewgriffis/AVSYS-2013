@@ -16,13 +16,13 @@ class attack {
     
 public:
     
-    void setup(float xPosPlayer, float attackWide);
-    void update(float yPosPlayer, bool moveRIGHT);
+    void setup(float xPosPlayer, float yPosPlayer, float attackWide);
+    void update(float xPosPlayer, float yPosPlayer, bool moveRIGHT);
     void draw();
     
-    float xPos, yPos, wide, tall, xVel, attackSpacer;
+    float xPos, yPos, wide, tall, xVel, attackSpacer; // Last is default space between player and attack.
     bool iTossThePower; // Does the player toss the power?
-    bool checkMoveRIGHT;
+    bool checkMoveRIGHT; // Is the player pressing Attack?
     
     
 };

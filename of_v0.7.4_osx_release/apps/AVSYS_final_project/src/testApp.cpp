@@ -28,7 +28,7 @@ void testApp::setup(){
     
     ofSetColor(0); // Make everything black, for now.
     
-    myAttack.setup(xPosPlayer, 50);
+    myAttack.setup(xPosPlayer, yPosPlayer, 50);
     
 }
 
@@ -55,7 +55,7 @@ void testApp::update(){
         delayMoveCounter = 0;
     }
     
-    myAttack.update(yPosPlayer, moveRIGHT);
+    myAttack.update(xPosPlayer, yPosPlayer, moveRIGHT);
     
 }
 
