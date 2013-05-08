@@ -21,24 +21,21 @@ public:
     void gotMessage(ofMessage msg);
     
     // The platforms:
-    float widePlatform;
-    float tallPlatform;
+    float widePlatform, tallPlatform;
     float verticalSpacer; // Divide the screen vertically.
     
     // The player:
-    float widePlayer;
-    float tallPlayer;
-    float xPosPlayer;
-    float yPosPlayer;
+    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer;
     float awayFromSurface; // Keep the player slightly off the edges.
-    bool moveUP;
-    bool moveDOWN;
+    bool moveUP, moveDOWN;
     bool moveLEFT; // This will not actually move but rather select.
     bool moveRIGHT; // This will not actually move but rather shoot.
     bool allowMove; // Prevent persistent movement.
     float delayMoveCounter; // Limit movement frequency.
     float delayMoveTill; // Set the movement frequency.
+    bool allowAttack; // Prevent overlapping attacks and limit frequency.
+    int numAttacks; // Set the number of attacks allowed onscreen at once.
     
-    attack myAttack;
+    vector<attack> attacks;
     
 };

@@ -9,12 +9,16 @@
 #include "attack.h"
 
 //--------------------------------------------------------------
-void attack::setup(float xPosPlayer, float yPosPlayer, float attackWide){
+void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks){
     
+    numAttacks = _numAttacks;
     attackSpacer = 10;
     wide = attackWide;
     tall = wide;
-    xPos = xPosPlayer + wide + attackSpacer;
+    widePlayer = _widePlayer;
+    xPos = xPosPlayer + widePlayer + attackSpacer;
+    // Through the power of math we calculate how far apart the attacks need to be to be evenly distributed across the screen at max capacity and to generate an uninterrupted attack flow:
+    attackMargin = (xPos*2) + (((ofGetWidth()-xPos) / numAttacks) - wide);
     yPos = yPosPlayer;
     xVel = 5;
     iTossThePower = false;
@@ -32,9 +36,6 @@ void attack::update(float xPosPlayer, float yPosPlayer, bool moveRIGHT){
     // If the attack hasn't been fired, mirror the player's yPos:
     if (iTossThePower == false) yPos = yPosPlayer;
     else xPos += xVel; // Otherwise it has been fired so move it horizontally.
-    
-    // If the attack moves offscreen, reset it:
-    if (xPos > ofGetWidth() + wide) setup(xPosPlayer, yPosPlayer, wide);
     
 }
 

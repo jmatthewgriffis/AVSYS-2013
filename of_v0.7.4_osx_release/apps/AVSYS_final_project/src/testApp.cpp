@@ -25,10 +25,20 @@ void testApp::setup(){
     allowMove = true;
     delayMoveCounter = 0;
     delayMoveTill = 30;
+    allowAttack = true;
+    numAttacks = 5;
     
     ofSetColor(0); // Make everything black, for now.
     
-    myAttack.setup(xPosPlayer, yPosPlayer, 50);
+}
+
+//--------------------------------------------------------------
+bool bShouldIErase(attack & a){
+    
+    // Zach showed me how to use this method to remove an element from a vector. We create a boolean function, i.e. one that will return a boolean (so we don't use 'void'). We feed it a class and pass a reference label that we make up (in this case 'a') so we can refer to the applicable object. Then we check for a certain condition -- in this case whether the object has moved too far offscreen to the right -- and if so we return a boolean value of 'true.' Otherwise it's 'false.'
+    
+    if (a.xPos > ofGetWidth() + a.attackSpacer) return true;
+    else return false;
     
 }
 
@@ -55,7 +65,28 @@ void testApp::update(){
         delayMoveCounter = 0;
     }
     
-    myAttack.update(xPosPlayer, yPosPlayer, moveRIGHT);
+    allowAttack = true; // Default mode allows attack.
+    if (attacks.size() != 0) { // If there is at least one attack onscreen...
+        if (attacks.size() >= numAttacks) allowAttack = false; // ...don't allow more than the max number of onscreen attacks.
+        for (int i=0; i<attacks.size(); i++) {
+            if (attacks[i].xPos < attacks[i].attackMargin) { // If any attack is too close to the player...
+                allowAttack = false; // ...prevent another attack.
+            }
+        }
+    }
+    
+    if (moveRIGHT && allowAttack) {
+        attack attack;
+        attack.setup(xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks);
+        attacks.push_back(attack);
+    }
+    
+    for (int i=0; i<attacks.size(); i++) {
+        attacks[i].update(xPosPlayer, yPosPlayer, moveRIGHT);
+    }
+    
+    // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes the one with a 'true' value:
+    ofRemove(attacks,bShouldIErase);
     
 }
 
@@ -72,7 +103,8 @@ void testApp::draw(){
     // Draw the player:
     ofRect(xPosPlayer, yPosPlayer, widePlayer, tallPlayer);
     
-    myAttack.draw();
+    //myAttack.draw();
+    for (int i=0; i<attacks.size(); i++) attacks[i].draw();
     
 }
 
@@ -171,6 +203,6 @@ void testApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
+void testApp::dragEvent(ofDragInfo dragInfo){
     
 }
