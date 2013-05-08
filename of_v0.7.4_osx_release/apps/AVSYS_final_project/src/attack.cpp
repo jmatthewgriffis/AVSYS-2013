@@ -12,29 +12,31 @@
 void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks){
     
     numAttacks = _numAttacks;
-    attackSpacer = 10;
+    handToPower = 10;
     wide = attackWide;
     tall = wide;
     widePlayer = _widePlayer;
-    xPos = xPosPlayer + widePlayer + attackSpacer;
+    xPos = xPosPlayer + widePlayer + handToPower;
     // Through the power of math we calculate how far apart the attacks need to be to be evenly distributed across the screen at max capacity and to generate an uninterrupted attack flow:
-    attackMargin = (xPos*2) + (((ofGetWidth()-xPos) / numAttacks) - wide);
+    attackSpacerPerfect = (xPos*2) + (((ofGetWidth()-xPos) / numAttacks) - wide);
+    // Also provide a minimum spacing so attacking is more responsive but still not overlapping (choose one of these methods):
+    attackSpacerMinimum = xPos + wide + handToPower;
     yPos = yPosPlayer;
     xVel = 5;
-    iTossThePower = false;
+    iTossThePower = checkMoveRIGHT = false;
     
 }
 
 //--------------------------------------------------------------
 void attack::update(float xPosPlayer, float yPosPlayer, bool moveRIGHT){
     
-    checkMoveRIGHT = moveRIGHT;
+    //checkMoveRIGHT = moveRIGHT;
     
     // Cue firing the attack if the player presses Attack:
-    if (checkMoveRIGHT == true) iTossThePower = true;
+    //if (checkMoveRIGHT == true) iTossThePower = true;
     
     // If the attack hasn't been fired, mirror the player's yPos:
-    if (iTossThePower == false) yPos = yPosPlayer;
+    if (checkMoveRIGHT) yPos = yPosPlayer;
     else xPos += xVel; // Otherwise it has been fired so move it horizontally.
     
 }

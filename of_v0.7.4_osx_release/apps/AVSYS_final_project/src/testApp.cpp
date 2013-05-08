@@ -37,7 +37,7 @@ bool bShouldIErase(attack & a){
     
     // Zach showed me how to use this method to remove an element from a vector. We create a boolean function, i.e. one that will return a boolean (so we don't use 'void'). We feed it a class and pass a reference label that we make up (in this case 'a') so we can refer to the applicable object. Then we check for a certain condition -- in this case whether the object has moved too far offscreen to the right -- and if so we return a boolean value of 'true.' Otherwise it's 'false.'
     
-    if (a.xPos > ofGetWidth() + a.attackSpacer) return true;
+    if (a.xPos > ofGetWidth() + a.handToPower) return true;
     else return false;
     
 }
@@ -69,19 +69,23 @@ void testApp::update(){
     if (attacks.size() != 0) { // If there is at least one attack onscreen...
         if (attacks.size() >= numAttacks) allowAttack = false; // ...don't allow more than the max number of onscreen attacks.
         for (int i=0; i<attacks.size(); i++) {
-            if (attacks[i].xPos < attacks[i].attackMargin) { // If any attack is too close to the player...
-                allowAttack = false; // ...prevent another attack.
-            }
+            // If any attack is too close to the player, prevent another attack:
+            //if (attacks[i].xPos < attacks[i].attackSpacerPerfect) { // Equal spacing.
+            if (attacks[i].xPos < attacks[i].attackSpacerMinimum) allowAttack = false; // Minimal spacing (more responsive).
         }
     }
     
+    // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector:
     if (moveRIGHT && allowAttack) {
         attack attack;
         attack.setup(xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks);
+        attack.checkMoveRIGHT = true;
         attacks.push_back(attack);
     }
     
     for (int i=0; i<attacks.size(); i++) {
+        // If the player is not holding the attack button, change the attacks' status to "released":
+        if (!moveRIGHT) attacks[i].checkMoveRIGHT = false;
         attacks[i].update(xPosPlayer, yPosPlayer, moveRIGHT);
     }
     

@@ -22,8 +22,9 @@ public:
     
     float xPos, yPos, wide, tall, xVel, widePlayer;
     int numAttacks;
-    float attackSpacer; // Default space between player and attack.
-    float attackMargin; // Minimal space between attacks.
+    float handToPower; // Default space between player and attack.
+    float attackSpacerPerfect; // Attacks are perfectly spaced.
+    float attackSpacerMinimum; // Attacks are minimally spaced.
     bool iTossThePower; // Does the player toss the power?
     bool checkMoveRIGHT; // Is the player pressing Attack?
     
