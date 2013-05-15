@@ -89,7 +89,7 @@ void testApp::update(){
         attacks[i].update(xPosPlayer, yPosPlayer, moveRIGHT);
     }
     
-    // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes the one with a 'true' value:
+    // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(attacks,bShouldIErase);
     
 }
@@ -125,6 +125,8 @@ void testApp::keyPressed(int key){
             
         case 'a':
         case 'A':
+        case 'j':
+        case 'J':
         case OF_KEY_LEFT:
             moveLEFT = true;
             break;
@@ -137,6 +139,8 @@ void testApp::keyPressed(int key){
             
         case 'd':
         case 'D':
+        case 'k':
+        case 'K':
         case OF_KEY_RIGHT:
             moveRIGHT = true;
             break;
@@ -157,6 +161,8 @@ void testApp::keyReleased(int key){
             
         case 'a':
         case 'A':
+        case 'j':
+        case 'J':
         case OF_KEY_LEFT:
             moveLEFT = false;
             break;
@@ -169,6 +175,8 @@ void testApp::keyReleased(int key){
             
         case 'd':
         case 'D':
+        case 'k':
+        case 'K':
         case OF_KEY_RIGHT:
             moveRIGHT = false;
             break;

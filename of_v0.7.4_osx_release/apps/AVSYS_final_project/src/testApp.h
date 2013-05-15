@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "attack.h"
+#include "oscillator.h"
 
 class testApp : public ofBaseApp{
     
