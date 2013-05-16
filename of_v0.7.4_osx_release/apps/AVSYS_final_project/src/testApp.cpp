@@ -30,6 +30,23 @@ void testApp::setup(){
     
     ofSetColor(0); // Make everything black, for now.
     
+    
+    
+    // From Zach's oscillator example (see class):
+    stream.setup(this, 2, 0, 44100, 512, 4);
+    soundBuffer = new float[512];
+    //...
+    sinWave.setup(44100);
+    sinWave.setFrequency(440);
+    sinWave.setVolume(0.7);
+    //...
+    sinWave2.setup(44100);
+    sinWave2.setFrequency(440);
+    sinWave2.setVolume(0.7);
+    
+    oscillators[0] = sinWave;
+    oscillators[1] = sinWave2;
+    
 }
 
 //--------------------------------------------------------------
@@ -78,7 +95,7 @@ void testApp::update(){
     // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector:
     if (moveRIGHT && allowAttack) {
         attack attack;
-        attack.setup(xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks);
+        attack.setup(this, xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks);
         attack.checkMoveRIGHT = true;
         attacks.push_back(attack);
     }
@@ -217,4 +234,26 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){
     
+}
+
+
+
+// From Zach's oscillator example (see class):
+//--------------------------------------------------------------
+void testApp::audioOut(float * output, int bufferSize, int nChannels){
+    
+    for (int j = 0; j < 1; j++) {
+        
+        oscillator oscillator = oscillators[j];
+        
+        for (int i = 0; i < bufferSize; i++){
+            
+            float sample = oscillator.getSample(); //ofRandom(-1,1);
+            
+            output[i*nChannels    ] = sample;
+            output[i*nChannels + 1] = sample;
+            
+            soundBuffer[i] = sample;
+        }
+    }
 }

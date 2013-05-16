@@ -39,4 +39,14 @@ public:
     
     vector<attack> attacks;
     
+    
+    
+    // From Zach's oscillator example (see class):
+    void audioOut(float * input, int bufferSize, int nChannels);
+    ofSoundStream stream;
+    float * soundBuffer;
+    oscillator sinWave;
+    oscillator sinWave2;
+    oscillator oscillators[2];
+    
 };
