@@ -15,12 +15,13 @@ class player {
     
 public:
   
-    void setup(float _verticalSpacer);
+    void setup(float _tallPlatform, float _verticalSpacer);
     void update();
     void draw();
     
-    // The player:
-    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer, verticalSpacer;
+    ofTrueTypeFont font;
+    int fontSize;
+    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer, tallPlatform, verticalSpacer, menuSpacer;
     float awayFromSurface; // Keep the player slightly off the edges.
     bool moveUP, moveDOWN;
     bool moveLEFT; // This will not actually move but rather select.

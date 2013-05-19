@@ -27,14 +27,14 @@ void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float 
     iTossThePower = checkMoveRIGHT = false;
     
     // Set the note:
-    if (whichNote == 1) note.loadSound("middleC.mp3");
-    else if (whichNote == 2) note.loadSound("d.mp3");
-    else if (whichNote == 3) note.loadSound("e.mp3");
-    else if (whichNote == 4) note.loadSound("f.mp3");
-    else if (whichNote == 5) note.loadSound("g.mp3");
-    else if (whichNote == 6) note.loadSound("a.mp3");
-    else if (whichNote == 7) note.loadSound("b.mp3");
-    else if (whichNote == 8) note.loadSound("highC.mp3");
+    if (whichNote == 1) note.loadSound("notes/middleC.mp3");
+    else if (whichNote == 2) note.loadSound("notes/d.mp3");
+    else if (whichNote == 3) note.loadSound("notes/e.mp3");
+    else if (whichNote == 4) note.loadSound("notes/f.mp3");
+    else if (whichNote == 5) note.loadSound("notes/g.mp3");
+    else if (whichNote == 6) note.loadSound("notes/a.mp3");
+    else if (whichNote == 7) note.loadSound("notes/b.mp3");
+    else if (whichNote == 8) note.loadSound("notes/highC.mp3");
     note.setVolume(1.0f);
     note.setLoop(true);
     note.play();

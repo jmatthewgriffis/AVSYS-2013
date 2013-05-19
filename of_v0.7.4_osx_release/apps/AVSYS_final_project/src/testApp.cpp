@@ -10,9 +10,9 @@ void testApp::setup(){
     // The platforms:
     widePlatform = ofGetWidth();
     tallPlatform = 10;
-    verticalSpacer = ofGetHeight()/6;
+    verticalSpacer = (ofGetHeight()-(tallPlatform*5))/6;
     
-    player.setup(verticalSpacer);
+    player.setup(tallPlatform, verticalSpacer);
     
     // The attacks:
     numAttacks = 5;
@@ -51,8 +51,8 @@ void testApp::update(){
         }
     }
     
-    // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector:
-    if (player.moveRIGHT && player.allowAttack) {
+    // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector (don't allow attack if menu is open):
+    if (player.moveRIGHT && player.allowAttack && !player.moveLEFT) {
         attack attack;
         attack.setup(player.xPosPlayer, player.yPosPlayer, player.widePlayer, 50, numAttacks, whichNote);
         attack.checkMoveRIGHT = true;
@@ -74,11 +74,7 @@ void testApp::update(){
 void testApp::draw(){
     
     // Draw the platforms:
-    ofRect(0, verticalSpacer, widePlatform, tallPlatform);
-    ofRect(0, verticalSpacer*2, widePlatform, tallPlatform);
-    ofRect(0, verticalSpacer*3, widePlatform, tallPlatform);
-    ofRect(0, verticalSpacer*4, widePlatform, tallPlatform);
-    ofRect(0, verticalSpacer*5, widePlatform, tallPlatform);
+    for (int i = 0; i < 5; i++) ofRect(0, verticalSpacer+tallPlatform*i+verticalSpacer*i, widePlatform, tallPlatform);
     
     player.draw();
     
@@ -102,7 +98,7 @@ void testApp::keyPressed(int key){
         case 'j':
         case 'J':
         case OF_KEY_LEFT:
-            player.moveLEFT = true;
+            if (!player.moveRIGHT) player.moveLEFT = true;
             break;
             
         case 's':
