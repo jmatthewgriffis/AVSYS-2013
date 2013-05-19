@@ -70,18 +70,33 @@ void player::draw() {
     
     if (moveLEFT) {
         
+        // Draw the menu background:
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        // Outer, hollow rect:
+        ofSetColor(255);
+        ofNoFill();
+        ofRect(x+fontSize/2, ofGetHeight()/2, fontSize*2+1, fontSize*8+menuSpacer*8+1);
+        ofFill();
+        // Inner, solid rect:
+        ofSetColor(200);
+        ofRect(x+fontSize/2, ofGetHeight()/2, fontSize*2, fontSize*8+menuSpacer*8);
+        ofSetRectMode(OF_RECTMODE_CORNER);
+        
+        // Draw the notes:
+        ofSetColor(255);
         font.drawString("C", x, bottomOfPlat + menuSpacer + fontSize);
-        font.drawString("D", x, bottomOfPlat + menuSpacer*2 + fontSize*2);
-        font.drawString("E", x, bottomOfPlat*2 + menuSpacer + fontSize);
-        font.drawString("F", x, bottomOfPlat*2 + menuSpacer*2 + fontSize*2);
-        font.drawString("G", x, bottomOfPlat*3 + menuSpacer + fontSize);
-        font.drawString("A", x, bottomOfPlat*3 + menuSpacer*2 + fontSize*2);
-        font.drawString("B", x, bottomOfPlat*4 + menuSpacer + fontSize);
+        font.drawString("B", x, bottomOfPlat + menuSpacer*2 + fontSize*2);
+        font.drawString("A", x, bottomOfPlat*2 + menuSpacer + fontSize);
+        font.drawString("G", x, bottomOfPlat*2 + menuSpacer*2 + fontSize*2);
+        font.drawString("F", x, bottomOfPlat*3 + menuSpacer + fontSize);
+        font.drawString("E", x, bottomOfPlat*3 + menuSpacer*2 + fontSize*2);
+        font.drawString("D", x, bottomOfPlat*4 + menuSpacer + fontSize);
         font.drawString("C", x, bottomOfPlat*4 + menuSpacer*2 + fontSize*2);
         
     }
     
     // The player:
+    ofSetColor(0);
     ofRect(xPosPlayer, yPosPlayer, widePlayer, tallPlayer);
     
 }

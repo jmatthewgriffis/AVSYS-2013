@@ -74,6 +74,7 @@ void testApp::update(){
 void testApp::draw(){
     
     // Draw the platforms:
+    ofSetColor(0);
     for (int i = 0; i < 5; i++) ofRect(0, verticalSpacer+tallPlatform*i+verticalSpacer*i, widePlatform, tallPlatform);
     
     player.draw();
