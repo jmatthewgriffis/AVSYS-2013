@@ -21,7 +21,7 @@ public:
     
     ofTrueTypeFont font;
     int fontSize;
-    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer, tallPlatform, verticalSpacer, menuSpacer;
+    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer, tallPlatform, verticalSpacer, menuSpacer, arrowWide, arrowTall, arrowSpacer;
     float awayFromSurface; // Keep the player slightly off the edges.
     bool moveUP, moveDOWN;
     bool moveLEFT; // This will not actually move but rather select.

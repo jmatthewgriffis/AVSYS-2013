@@ -15,9 +15,12 @@ void player::setup(float _tallPlatform, float _verticalSpacer) {
     tallPlatform = _tallPlatform;
     verticalSpacer = _verticalSpacer;
     menuSpacer = (verticalSpacer-fontSize*2)/3;
+    arrowWide = 15;
+    arrowTall = arrowWide/2;
+    arrowSpacer = 5;
     widePlayer = 50;
     tallPlayer = widePlayer;
-    awayFromSurface = 10;
+    awayFromSurface = 15;
     xPosPlayer = 80+awayFromSurface;
     yPosPlayer = ofGetHeight()-tallPlayer-awayFromSurface;
     moveUP = false;
@@ -51,17 +54,20 @@ void player::update() {
         
     } // End if (!moveLeft)
     else { // If the player is using the menu:
-        if (moveUP && allowChangeNote) if (whichNote < 8) {
+        if (moveUP && allowChangeNote) {
             whichNote++;
             allowChangeNote = false;
         }
-        if (moveDOWN && allowChangeNote) if (whichNote > 1) {
+        if (moveDOWN && allowChangeNote){ 
             whichNote--;
             allowChangeNote = false;
         }
     }
     
-    cout<<whichNote<<endl;
+    if (whichNote > 8) whichNote = 1;
+    if (whichNote < 1) whichNote = 8;
+    
+    //cout<<whichNote<<endl;
     
     // Control player movement frequency:
     if (allowMove == false) delayMoveCounter++;
@@ -113,7 +119,40 @@ void player::draw() {
         font.drawString("D", x, topOfMenu + menuSpacer*6.5 + fontSize*7);
         font.drawString("C", x, topOfMenu + menuSpacer*7.5 + fontSize*8);
         
-    } // End note menu.
+    }
+    
+    // End note menu.
+    
+    // The cue arrows surrounding the player to indicate controls. Change the color based on how the arrows are being used:
+    ofSetColor(0);
+    // Top:
+    if (yPosPlayer > verticalSpacer || moveLEFT) {
+    if (moveUP) ofSetColor(255);
+        if (!moveUP && moveLEFT) ofSetColor(255,0,0);
+    if (moveUP && moveLEFT) ofSetColor(255);
+    ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer-arrowSpacer-arrowTall);
+    }
+    ofSetColor(0);
+    if (yPosPlayer < ofGetHeight() - verticalSpacer || moveLEFT) {
+    // Bottom:
+    if (moveDOWN) ofSetColor(255);
+        if (!moveDOWN && moveLEFT) ofSetColor(255,0,0);
+    if (moveDOWN && moveLEFT) ofSetColor(255);
+    ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer+tallPlayer+arrowSpacer+arrowTall);
+    }
+    ofSetColor(0);
+    // Left:
+    if (!moveRIGHT) {
+    if (moveLEFT) ofSetColor(255);
+    ofTriangle(xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer-arrowSpacer-arrowTall, yPosPlayer+tallPlayer/2);
+    }
+    ofSetColor(0);
+    // Right:
+    if (!moveLEFT) {
+    if (moveRIGHT) ofSetColor(255);
+    ofTriangle(xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer+widePlayer+arrowSpacer+arrowTall, yPosPlayer+tallPlayer/2);
+    }
+    
     
     // The player:
     ofSetColor(0);

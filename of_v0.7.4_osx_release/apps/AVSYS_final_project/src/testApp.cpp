@@ -115,7 +115,7 @@ void testApp::keyPressed(int key){
         case 'k':
         case 'K':
         case OF_KEY_RIGHT:
-            player.moveRIGHT = true;
+            if (!player.moveLEFT) player.moveRIGHT = true;
             break;
             
             // Debug - change the note:

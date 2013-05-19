@@ -13,7 +13,7 @@ void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float 
     
     numAttacks = _numAttacks;
     whichNote = _whichNote;
-    handToPower = 10;
+    handToPower = 15;
     wide = attackWide;
     tall = wide;
     widePlayer = _widePlayer;
