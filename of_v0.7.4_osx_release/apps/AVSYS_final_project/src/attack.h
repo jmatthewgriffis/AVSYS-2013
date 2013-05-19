@@ -11,7 +11,6 @@
 
 // This file contains all the OF code. Make sure to "include" it:
 #include "ofMain.h"
-#include "oscillator.h"
 
 class attack {
     

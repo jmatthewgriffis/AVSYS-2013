@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "attack.h"
-#include "oscillator.h"
 
 class testApp : public ofBaseApp{
     
@@ -39,15 +38,5 @@ public:
     int whichNote; // Set the note to attack with (1-8 corresponds to C-C).
     
     vector<attack> attacks;
-    
-    
-    
-    // From Zach's oscillator example (see class):
-    void audioOut(float * input, int bufferSize, int nChannels);
-    ofSoundStream stream;
-    float * soundBuffer;
-    oscillator sinWave;
-    oscillator sinWave2;
-    oscillator oscillators[2];
     
 };

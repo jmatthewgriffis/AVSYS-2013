@@ -31,21 +31,6 @@ void testApp::setup(){
     
     ofSetColor(0); // Make everything black, for now.
     
-    // From Zach's oscillator example (see class):
-    stream.setup(this, 2, 0, 44100, 512, 4);
-    soundBuffer = new float[512];
-    //...
-    sinWave.setup(44100);
-    sinWave.setFrequency(440);
-    sinWave.setVolume(0.7);
-    //...
-    sinWave2.setup(44100);
-    sinWave2.setFrequency(440);
-    sinWave2.setVolume(0.7);
-    
-    oscillators[0] = sinWave;
-    oscillators[1] = sinWave2;
-    
 }
 
 //--------------------------------------------------------------
@@ -54,7 +39,7 @@ bool bShouldIErase(attack & a){
     // Zach showed me how to use this method to remove an element from a vector. We create a boolean function, i.e. one that will return a boolean (so we don't use 'void'). We feed it a class and pass a reference label that we make up (in this case 'a') so we can refer to the applicable object. Then we check for a certain condition -- in this case whether the object has moved too far offscreen to the right -- and if so we return a boolean value of 'true.' Otherwise it's 'false.'
     
     if (a.xPos > ofGetWidth() + a.handToPower) {
-        a.note.stop();
+        a.note.stop(); // Quit playing the attack's note (this may not be necessary, but just in case).
         return true;
     }
     else return false;
@@ -126,7 +111,7 @@ void testApp::draw(){
     // Draw the player:
     ofRect(xPosPlayer, yPosPlayer, widePlayer, tallPlayer);
     
-    //myAttack.draw();
+    // Draw the attack(s):
     for (int i=0; i<attacks.size(); i++) attacks[i].draw();
     
 }
@@ -245,26 +230,4 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){
     
-}
-
-
-
-// From Zach's oscillator example (see class):
-//--------------------------------------------------------------
-void testApp::audioOut(float * output, int bufferSize, int nChannels){
-    
-    /*for (int j = 0; j < 1; j++) {
-        
-        oscillator oscillator = oscillators[j];
-        
-        for (int i = 0; i < bufferSize; i++){
-            
-            float sample = oscillator.getSample(); //ofRandom(-1,1);
-            
-            output[i*nChannels    ] = sample;
-            output[i*nChannels + 1] = sample;
-            
-            soundBuffer[i] = sample;
-        }
-    }*/
 }
