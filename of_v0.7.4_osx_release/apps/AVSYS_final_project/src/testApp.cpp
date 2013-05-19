@@ -12,6 +12,11 @@ void testApp::setup(){
     tallPlatform = 10;
     verticalSpacer = (ofGetHeight()-(tallPlatform*5))/6;
     
+    // The enemies:
+    myEnemy.setup();
+    enemies.push_back(myEnemy);
+    
+    // The player:
     player.setup(tallPlatform, verticalSpacer);
     
     // The attacks:
@@ -29,6 +34,19 @@ bool bShouldIErase(attack & a){
     
     if (a.xPos > ofGetWidth() + a.handToPower) {
         a.note.stop(); // Quit playing the attack's note (this may not be necessary, but just in case).
+        return true;
+    }
+    else return false;
+    
+}
+
+//--------------------------------------------------------------
+bool bShouldIErase2(enemy & a, enemy & b){
+    
+    // Not working?
+    if (a.xPos > b.xPos+b.wide) {
+        a.note.stop();
+        b.note.stop();
         return true;
     }
     else return false;
@@ -67,8 +85,23 @@ void testApp::update(){
         attacks[i].update(player.xPosPlayer, player.yPosPlayer, player.moveRIGHT);
     }
     
+    // Collision between attack and enemy:
+    for (int i = 0; i < attacks.size(); i++) {
+        for (int j = 0; j < enemies.size(); j++) {
+            attacks[i].note.setVolume(0.3f); // Default w/o collision.
+            enemies[j].note.setVolume(0.3f); // Default w/o collision.
+            if (attacks[i].xPos+attacks[i].wide > enemies[j].xPos && attacks[i].xPos < enemies[j].xPos+enemies[j].wide) {
+                attacks[i].note.setVolume(1.0f);
+                enemies[j].note.setVolume(1.0f);
+            }
+        }
+    }
+    
+    for (int i = 0; i < enemies.size(); i++) enemies[i].update();
+    
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(attacks,bShouldIErase);
+    //ofRemove(enemies,bShouldIErase); // Not working.
     
 }
 
@@ -78,6 +111,8 @@ void testApp::draw(){
     // Draw the platforms:
     ofSetColor(0);
     for (int i = 0; i < 5; i++) ofRect(0, verticalSpacer+tallPlatform*i+verticalSpacer*i, widePlatform, tallPlatform);
+    
+    for (int i = 0; i < enemies.size(); i++) enemies[i].draw();
     
     player.draw();
     
@@ -118,14 +153,21 @@ void testApp::keyPressed(int key){
             if (!player.moveLEFT) player.moveRIGHT = true;
             break;
             
-            // Debug - change the note:
-        /*case '-':
-            if (whichNote > 1) whichNote--;
+        case 'r':
+        case 'R':
+            // Clear out the vector:
+            for (int i=0; i<attacks.size(); i++) attacks.erase(attacks.begin(), attacks.end());
+            setup();
             break;
             
-        case '=':
-            if (whichNote < 8) whichNote++;
-            break;*/
+            // Debug - change the note:
+            /*case '-':
+             if (whichNote > 1) whichNote--;
+             break;
+             
+             case '=':
+             if (whichNote < 8) whichNote++;
+             break;*/
     }
     
 }

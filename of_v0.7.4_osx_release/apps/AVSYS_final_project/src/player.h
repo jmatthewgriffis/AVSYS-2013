@@ -14,7 +14,7 @@
 class player {
     
 public:
-  
+    
     void setup(float _tallPlatform, float _verticalSpacer);
     void update();
     void draw();

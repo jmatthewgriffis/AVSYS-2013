@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "player.h"
 #include "attack.h"
+#include "enemy.h"
 
 class testApp : public ofBaseApp{
     
@@ -24,6 +25,10 @@ public:
     // The platforms:
     float widePlatform, tallPlatform;
     float verticalSpacer; // Divide the screen vertically.
+    
+    // The enemies:
+    enemy myEnemy;
+    vector<enemy> enemies;
     
     // The player:
     player player;

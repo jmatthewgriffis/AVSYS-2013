@@ -58,7 +58,7 @@ void player::update() {
             whichNote++;
             allowChangeNote = false;
         }
-        if (moveDOWN && allowChangeNote){ 
+        if (moveDOWN && allowChangeNote){
             whichNote--;
             allowChangeNote = false;
         }
@@ -127,30 +127,30 @@ void player::draw() {
     ofSetColor(0);
     // Top:
     if (yPosPlayer > verticalSpacer || moveLEFT) {
-    if (moveUP) ofSetColor(255);
+        if (moveUP) ofSetColor(255);
         if (!moveUP && moveLEFT) ofSetColor(255,0,0);
-    if (moveUP && moveLEFT) ofSetColor(255);
-    ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer-arrowSpacer-arrowTall);
+        if (moveUP && moveLEFT) ofSetColor(255);
+        ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer-arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer-arrowSpacer-arrowTall);
     }
     ofSetColor(0);
     if (yPosPlayer < ofGetHeight() - verticalSpacer || moveLEFT) {
-    // Bottom:
-    if (moveDOWN) ofSetColor(255);
+        // Bottom:
+        if (moveDOWN) ofSetColor(255);
         if (!moveDOWN && moveLEFT) ofSetColor(255,0,0);
-    if (moveDOWN && moveLEFT) ofSetColor(255);
-    ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer+tallPlayer+arrowSpacer+arrowTall);
+        if (moveDOWN && moveLEFT) ofSetColor(255);
+        ofTriangle(xPosPlayer+widePlayer/2-arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2+arrowWide/2, yPosPlayer+tallPlayer+arrowSpacer, xPosPlayer+widePlayer/2, yPosPlayer+tallPlayer+arrowSpacer+arrowTall);
     }
     ofSetColor(0);
     // Left:
     if (!moveRIGHT) {
-    if (moveLEFT) ofSetColor(255);
-    ofTriangle(xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer-arrowSpacer-arrowTall, yPosPlayer+tallPlayer/2);
+        if (moveLEFT) ofSetColor(255);
+        ofTriangle(xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer-arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer-arrowSpacer-arrowTall, yPosPlayer+tallPlayer/2);
     }
     ofSetColor(0);
     // Right:
     if (!moveLEFT) {
-    if (moveRIGHT) ofSetColor(255);
-    ofTriangle(xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer+widePlayer+arrowSpacer+arrowTall, yPosPlayer+tallPlayer/2);
+        if (moveRIGHT) ofSetColor(255);
+        ofTriangle(xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2-arrowWide/2, xPosPlayer+widePlayer+arrowSpacer, yPosPlayer+tallPlayer/2+arrowWide/2, xPosPlayer+widePlayer+arrowSpacer+arrowTall, yPosPlayer+tallPlayer/2);
     }
     
     
