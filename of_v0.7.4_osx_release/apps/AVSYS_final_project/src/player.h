@@ -30,6 +30,8 @@ public:
     float delayMoveCounter; // Limit movement frequency.
     float delayMoveTill; // Set the movement frequency.
     bool allowAttack; // Prevent overlapping attacks and limit frequency.
+    int whichNote; // Select a note (1-8 maps to C-C).
+    bool allowChangeNote; // Ensure note-changing is precise.
     
 };
 

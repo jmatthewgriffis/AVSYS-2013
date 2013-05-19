@@ -28,6 +28,8 @@ void player::setup(float _tallPlatform, float _verticalSpacer) {
     delayMoveCounter = 0;
     delayMoveTill = 30;
     allowAttack = true;
+    whichNote = 1;
+    allowChangeNote = true;
     
 }
 
@@ -48,6 +50,18 @@ void player::update() {
         }
         
     } // End if (!moveLeft)
+    else { // If the player is using the menu:
+        if (moveUP && allowChangeNote) if (whichNote < 8) {
+            whichNote++;
+            allowChangeNote = false;
+        }
+        if (moveDOWN && allowChangeNote) if (whichNote > 1) {
+            whichNote--;
+            allowChangeNote = false;
+        }
+    }
+    
+    cout<<whichNote<<endl;
     
     // Control player movement frequency:
     if (allowMove == false) delayMoveCounter++;
@@ -65,8 +79,7 @@ void player::draw() {
     // The note menu:
     
     float x = xPosPlayer/2-fontSize/2;
-    float bottomOfPlat = verticalSpacer + tallPlatform;
-    //float topOfPlat = verticalSpacer*2 - menuSpacer;
+    float topOfMenu = ofGetHeight()/2 - (fontSize*8+menuSpacer*8)/2;
     
     if (moveLEFT) {
         
@@ -82,18 +95,25 @@ void player::draw() {
         ofRect(x+fontSize/2, ofGetHeight()/2, fontSize*2, fontSize*8+menuSpacer*8);
         ofSetRectMode(OF_RECTMODE_CORNER);
         
+        // Draw the highlight box:
+        ofSetColor(255,0,0);
+        float y;
+        for (int i = 1; i < 9; i++) if (whichNote == i) y = ofGetHeight()/2 + (fontSize*8+menuSpacer*8)/2 - (fontSize+menuSpacer) * i;
+        
+        ofRect(x-fontSize/2, y, fontSize*2, fontSize+menuSpacer);
+        
         // Draw the notes:
         ofSetColor(255);
-        font.drawString("C", x, bottomOfPlat + menuSpacer + fontSize);
-        font.drawString("B", x, bottomOfPlat + menuSpacer*2 + fontSize*2);
-        font.drawString("A", x, bottomOfPlat*2 + menuSpacer + fontSize);
-        font.drawString("G", x, bottomOfPlat*2 + menuSpacer*2 + fontSize*2);
-        font.drawString("F", x, bottomOfPlat*3 + menuSpacer + fontSize);
-        font.drawString("E", x, bottomOfPlat*3 + menuSpacer*2 + fontSize*2);
-        font.drawString("D", x, bottomOfPlat*4 + menuSpacer + fontSize);
-        font.drawString("C", x, bottomOfPlat*4 + menuSpacer*2 + fontSize*2);
+        font.drawString("C", x, topOfMenu + menuSpacer*0.5 + fontSize);
+        font.drawString("B", x, topOfMenu + menuSpacer*1.5 + fontSize*2);
+        font.drawString("A", x, topOfMenu + menuSpacer*2.5 + fontSize*3);
+        font.drawString("G", x, topOfMenu + menuSpacer*3.5 + fontSize*4);
+        font.drawString("F", x, topOfMenu + menuSpacer*4.5 + fontSize*5);
+        font.drawString("E", x, topOfMenu + menuSpacer*5.5 + fontSize*6);
+        font.drawString("D", x, topOfMenu + menuSpacer*6.5 + fontSize*7);
+        font.drawString("C", x, topOfMenu + menuSpacer*7.5 + fontSize*8);
         
-    }
+    } // End note menu.
     
     // The player:
     ofSetColor(0);

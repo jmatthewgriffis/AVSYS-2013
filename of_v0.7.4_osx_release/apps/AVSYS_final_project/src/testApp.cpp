@@ -40,6 +40,8 @@ void testApp::update(){
     
     player.update();
     
+    whichNote = player.whichNote;
+    
     // Regulate the frequency of attacks:
     player.allowAttack = true; // Default mode allows attack.
     if (attacks.size() != 0) { // If there is at least one attack onscreen...
@@ -117,13 +119,13 @@ void testApp::keyPressed(int key){
             break;
             
             // Debug - change the note:
-        case '-':
+        /*case '-':
             if (whichNote > 1) whichNote--;
             break;
             
         case '=':
             if (whichNote < 8) whichNote++;
-            break;
+            break;*/
     }
     
 }
@@ -137,6 +139,7 @@ void testApp::keyReleased(int key){
         case 'W':
         case OF_KEY_UP:
             player.moveUP = false;
+            player.allowChangeNote = true;
             break;
             
         case 'a':
@@ -151,6 +154,7 @@ void testApp::keyReleased(int key){
         case 'S':
         case OF_KEY_DOWN:
             player.moveDOWN = false;
+            player.allowChangeNote = true;
             break;
             
         case 'd':
