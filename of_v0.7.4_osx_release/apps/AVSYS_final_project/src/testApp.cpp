@@ -27,10 +27,9 @@ void testApp::setup(){
     delayMoveTill = 30;
     allowAttack = true;
     numAttacks = 5;
+    whichNote = 1;
     
     ofSetColor(0); // Make everything black, for now.
-    
-    
     
     // From Zach's oscillator example (see class):
     stream.setup(this, 2, 0, 44100, 512, 4);
@@ -54,7 +53,10 @@ bool bShouldIErase(attack & a){
     
     // Zach showed me how to use this method to remove an element from a vector. We create a boolean function, i.e. one that will return a boolean (so we don't use 'void'). We feed it a class and pass a reference label that we make up (in this case 'a') so we can refer to the applicable object. Then we check for a certain condition -- in this case whether the object has moved too far offscreen to the right -- and if so we return a boolean value of 'true.' Otherwise it's 'false.'
     
-    if (a.xPos > ofGetWidth() + a.handToPower) return true;
+    if (a.xPos > ofGetWidth() + a.handToPower) {
+        a.note.stop();
+        return true;
+    }
     else return false;
     
 }
@@ -95,7 +97,7 @@ void testApp::update(){
     // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector:
     if (moveRIGHT && allowAttack) {
         attack attack;
-        attack.setup(this, xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks);
+        attack.setup(this, xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks, whichNote);
         attack.checkMoveRIGHT = true;
         attacks.push_back(attack);
     }
@@ -160,6 +162,15 @@ void testApp::keyPressed(int key){
         case 'K':
         case OF_KEY_RIGHT:
             moveRIGHT = true;
+            break;
+            
+            // Debug - change the note:
+            case '-':
+            if (whichNote > 1) whichNote--;
+            break;
+            
+            case '=':
+            if (whichNote < 8) whichNote++;
             break;
     }
     
@@ -242,7 +253,7 @@ void testApp::dragEvent(ofDragInfo dragInfo){
 //--------------------------------------------------------------
 void testApp::audioOut(float * output, int bufferSize, int nChannels){
     
-    for (int j = 0; j < 1; j++) {
+    /*for (int j = 0; j < 1; j++) {
         
         oscillator oscillator = oscillators[j];
         
@@ -255,5 +266,5 @@ void testApp::audioOut(float * output, int bufferSize, int nChannels){
             
             soundBuffer[i] = sample;
         }
-    }
+    }*/
 }

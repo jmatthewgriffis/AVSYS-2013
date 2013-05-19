@@ -9,9 +9,10 @@
 #include "attack.h"
 
 //--------------------------------------------------------------
-void attack::setup(ofBaseApp * appPointer, float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks){
+void attack::setup(ofBaseApp * appPointer, float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks, int _whichNote){
     
     numAttacks = _numAttacks;
+    whichNote = _whichNote;
     handToPower = 10;
     wide = attackWide;
     tall = wide;
@@ -24,6 +25,19 @@ void attack::setup(ofBaseApp * appPointer, float xPosPlayer, float yPosPlayer, f
     yPos = yPosPlayer;
     xVel = 5;
     iTossThePower = checkMoveRIGHT = false;
+    
+    // Set the note:
+    if (whichNote == 1) note.loadSound("middleC.mp3");
+    else if (whichNote == 2) note.loadSound("d.mp3");
+    else if (whichNote == 3) note.loadSound("e.mp3");
+    else if (whichNote == 4) note.loadSound("f.mp3");
+    else if (whichNote == 5) note.loadSound("g.mp3");
+    else if (whichNote == 6) note.loadSound("a.mp3");
+    else if (whichNote == 7) note.loadSound("b.mp3");
+    else if (whichNote == 8) note.loadSound("highC.mp3");
+    note.setVolume(1.0f);
+    note.setLoop(true);
+    note.play();
     
 }
 

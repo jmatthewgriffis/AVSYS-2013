@@ -41,7 +41,7 @@ while( true ) {
     
     counter ++;
     //<<<counter>>>; // Prints the value of the counter.
-
+    
     // Delay the arrival of each note in the chord by manipulating the gain based on the counter:
     if (counter < delay) {
         0 => oscE.gain;

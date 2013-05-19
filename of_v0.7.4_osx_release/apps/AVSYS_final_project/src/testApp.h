@@ -36,6 +36,7 @@ public:
     float delayMoveTill; // Set the movement frequency.
     bool allowAttack; // Prevent overlapping attacks and limit frequency.
     int numAttacks; // Set the number of attacks allowed onscreen at once.
+    int whichNote; // Set the note to attack with (1-8 corresponds to C-C).
     
     vector<attack> attacks;
     
