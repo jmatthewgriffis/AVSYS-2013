@@ -16,7 +16,7 @@ class attack {
     
 public:
     
-    void setup(ofBaseApp * appPointer, float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks, int _whichNote);
+    void setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks, int _whichNote);
     void update(float xPosPlayer, float yPosPlayer, bool moveRIGHT);
     void draw();
     

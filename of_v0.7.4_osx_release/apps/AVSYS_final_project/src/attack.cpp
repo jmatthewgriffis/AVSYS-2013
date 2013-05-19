@@ -9,7 +9,7 @@
 #include "attack.h"
 
 //--------------------------------------------------------------
-void attack::setup(ofBaseApp * appPointer, float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks, int _whichNote){
+void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float attackWide, int _numAttacks, int _whichNote){
     
     numAttacks = _numAttacks;
     whichNote = _whichNote;

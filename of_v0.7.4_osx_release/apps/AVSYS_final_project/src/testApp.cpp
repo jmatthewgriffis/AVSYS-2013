@@ -12,20 +12,9 @@ void testApp::setup(){
     tallPlatform = 10;
     verticalSpacer = ofGetHeight()/6;
     
-    // The player:
-    widePlayer = 50;
-    tallPlayer = widePlayer;
-    awayFromSurface = 10;
-    xPosPlayer = awayFromSurface;
-    yPosPlayer = ofGetHeight()-tallPlayer-awayFromSurface;
-    moveUP = false;
-    moveDOWN = false;
-    moveLEFT = false;
-    moveRIGHT = false;
-    allowMove = true;
-    delayMoveCounter = 0;
-    delayMoveTill = 30;
-    allowAttack = true;
+    player.setup(verticalSpacer);
+    
+    // The attacks:
     numAttacks = 5;
     whichNote = 1;
     
@@ -49,48 +38,31 @@ bool bShouldIErase(attack & a){
 //--------------------------------------------------------------
 void testApp::update(){
     
-    // Move the player under certain conditions and limit frequency:
-    if (moveUP == true && allowMove == true && (yPosPlayer > verticalSpacer)) {
-        yPosPlayer -= verticalSpacer;
-        allowMove = false;
-    }
+    player.update();
     
-    if (moveDOWN == true && allowMove == true && (yPosPlayer < ofGetHeight() - verticalSpacer)) {
-        yPosPlayer += verticalSpacer;
-        allowMove = false;
-    }
-    
-    // Control player movement frequency:
-    if (allowMove == false) delayMoveCounter++;
-    
-    /* Reset movement if the frequency limit has been reached but also if the player lets go of all movement keys. That way if the player holds a momvement button the pace is constrained but if the player rapidly presses the button he or she can move more quickly: */
-    if ((delayMoveCounter >= delayMoveTill) || (moveUP == false && moveDOWN == false)) {
-        allowMove = true;
-        delayMoveCounter = 0;
-    }
-    
-    allowAttack = true; // Default mode allows attack.
+    // Regulate the frequency of attacks:
+    player.allowAttack = true; // Default mode allows attack.
     if (attacks.size() != 0) { // If there is at least one attack onscreen...
-        if (attacks.size() >= numAttacks) allowAttack = false; // ...don't allow more than the max number of onscreen attacks.
+        if (attacks.size() >= numAttacks) player.allowAttack = false; // ...don't allow more than the max number of onscreen attacks.
         for (int i=0; i<attacks.size(); i++) {
             // If any attack is too close to the player, prevent another attack:
             //if (attacks[i].xPos < attacks[i].attackSpacerPerfect) { // Equal spacing.
-            if (attacks[i].xPos < attacks[i].attackSpacerMinimum) allowAttack = false; // Minimal spacing (more responsive).
+            if (attacks[i].xPos < attacks[i].attackSpacerMinimum) player.allowAttack = false; // Minimal spacing (more responsive).
         }
     }
     
     // If the player presses the attack button and an attack is allowed, create an attack object and set it up, set the attack's status to "held," and store it in the attack vector:
-    if (moveRIGHT && allowAttack) {
+    if (player.moveRIGHT && player.allowAttack) {
         attack attack;
-        attack.setup(this, xPosPlayer, yPosPlayer, widePlayer, 50, numAttacks, whichNote);
+        attack.setup(player.xPosPlayer, player.yPosPlayer, player.widePlayer, 50, numAttacks, whichNote);
         attack.checkMoveRIGHT = true;
         attacks.push_back(attack);
     }
     
     for (int i=0; i<attacks.size(); i++) {
         // If the player is not holding the attack button, change the attacks' status to "released":
-        if (!moveRIGHT) attacks[i].checkMoveRIGHT = false;
-        attacks[i].update(xPosPlayer, yPosPlayer, moveRIGHT);
+        if (!player.moveRIGHT) attacks[i].checkMoveRIGHT = false;
+        attacks[i].update(player.xPosPlayer, player.yPosPlayer, player.moveRIGHT);
     }
     
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
@@ -108,10 +80,8 @@ void testApp::draw(){
     ofRect(0, verticalSpacer*4, widePlatform, tallPlatform);
     ofRect(0, verticalSpacer*5, widePlatform, tallPlatform);
     
-    // Draw the player:
-    ofRect(xPosPlayer, yPosPlayer, widePlayer, tallPlayer);
+    player.draw();
     
-    // Draw the attack(s):
     for (int i=0; i<attacks.size(); i++) attacks[i].draw();
     
 }
@@ -124,7 +94,7 @@ void testApp::keyPressed(int key){
         case 'w':
         case 'W':
         case OF_KEY_UP:
-            moveUP = true;
+            player.moveUP = true;
             break;
             
         case 'a':
@@ -132,13 +102,13 @@ void testApp::keyPressed(int key){
         case 'j':
         case 'J':
         case OF_KEY_LEFT:
-            moveLEFT = true;
+            player.moveLEFT = true;
             break;
             
         case 's':
         case 'S':
         case OF_KEY_DOWN:
-            moveDOWN = true;
+            player.moveDOWN = true;
             break;
             
         case 'd':
@@ -146,15 +116,15 @@ void testApp::keyPressed(int key){
         case 'k':
         case 'K':
         case OF_KEY_RIGHT:
-            moveRIGHT = true;
+            player.moveRIGHT = true;
             break;
             
             // Debug - change the note:
-            case '-':
+        case '-':
             if (whichNote > 1) whichNote--;
             break;
             
-            case '=':
+        case '=':
             if (whichNote < 8) whichNote++;
             break;
     }
@@ -169,7 +139,7 @@ void testApp::keyReleased(int key){
         case 'w':
         case 'W':
         case OF_KEY_UP:
-            moveUP = false;
+            player.moveUP = false;
             break;
             
         case 'a':
@@ -177,13 +147,13 @@ void testApp::keyReleased(int key){
         case 'j':
         case 'J':
         case OF_KEY_LEFT:
-            moveLEFT = false;
+            player.moveLEFT = false;
             break;
             
         case 's':
         case 'S':
         case OF_KEY_DOWN:
-            moveDOWN = false;
+            player.moveDOWN = false;
             break;
             
         case 'd':
@@ -191,7 +161,7 @@ void testApp::keyReleased(int key){
         case 'k':
         case 'K':
         case OF_KEY_RIGHT:
-            moveRIGHT = false;
+            player.moveRIGHT = false;
             break;
     }
     

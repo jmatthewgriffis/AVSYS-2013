@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "player.h"
 #include "attack.h"
 
 class testApp : public ofBaseApp{
@@ -25,18 +26,11 @@ public:
     float verticalSpacer; // Divide the screen vertically.
     
     // The player:
-    float widePlayer, tallPlayer, xPosPlayer, yPosPlayer;
-    float awayFromSurface; // Keep the player slightly off the edges.
-    bool moveUP, moveDOWN;
-    bool moveLEFT; // This will not actually move but rather select.
-    bool moveRIGHT; // This will not actually move but rather shoot.
-    bool allowMove; // Prevent persistent movement.
-    float delayMoveCounter; // Limit movement frequency.
-    float delayMoveTill; // Set the movement frequency.
-    bool allowAttack; // Prevent overlapping attacks and limit frequency.
+    player player;
+    
+    // The attacks:
+    vector<attack> attacks;
     int numAttacks; // Set the number of attacks allowed onscreen at once.
     int whichNote; // Set the note to attack with (1-8 corresponds to C-C).
-    
-    vector<attack> attacks;
     
 };
