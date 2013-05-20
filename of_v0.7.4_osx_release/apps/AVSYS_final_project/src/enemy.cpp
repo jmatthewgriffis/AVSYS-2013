@@ -11,12 +11,15 @@
 void enemy::setup() {
     
     whichNote = 1;
+    
     wide = 150;
     tall = wide/3;
     xPos = ofGetWidth()-wide-15;
     yPos = ofGetHeight()-tall-15 - ((ofGetHeight()-(10*5))/6 + 10)*3;
     // -= verticalSpacer + tallPlatform
     xVel = 0;
+    
+    destroyMe = false;
     
     // Set the note:
     if (whichNote == 1) note.loadSound("notes/middleC.mp3");

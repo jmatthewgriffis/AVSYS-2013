@@ -21,6 +21,7 @@ public:
     
     float xPos, yPos, wide, tall, xVel;
     int whichNote;
+    bool destroyMe;
     
     ofSoundPlayer note;
     

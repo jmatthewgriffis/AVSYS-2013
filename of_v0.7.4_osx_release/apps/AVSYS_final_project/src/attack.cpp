@@ -24,7 +24,7 @@ void attack::setup(float xPosPlayer, float yPosPlayer, float _widePlayer, float 
     attackSpacerMinimum = xPos + wide + handToPower;
     yPos = yPosPlayer;
     xVel = 5;
-    iTossThePower = checkMoveRIGHT = false;
+    iTossThePower = checkMoveRIGHT = destroyMe = false;
     
     // Set the note:
     if (whichNote == 1) note.loadSound("notes/middleC.mp3");

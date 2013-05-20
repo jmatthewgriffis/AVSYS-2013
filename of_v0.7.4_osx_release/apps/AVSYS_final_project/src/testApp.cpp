@@ -32,29 +32,40 @@ bool bShouldIErase(attack & a){
     
     // Zach showed me how to use this method to remove an element from a vector. We create a boolean function, i.e. one that will return a boolean (so we don't use 'void'). We feed it a class and pass a reference label that we make up (in this case 'a') so we can refer to the applicable object. Then we check for a certain condition -- in this case whether the object has moved too far offscreen to the right -- and if so we return a boolean value of 'true.' Otherwise it's 'false.'
     
-    if (a.xPos > ofGetWidth() + a.handToPower) {
-        a.note.stop(); // Quit playing the attack's note (this may not be necessary, but just in case).
-        return true;
-    }
+    if (a.destroyMe) return true;
     else return false;
     
 }
 
 //--------------------------------------------------------------
-bool bShouldIErase2(enemy & a, enemy & b){
+bool bShouldIErase2(enemy & a){
     
-    // Not working?
-    if (a.xPos > b.xPos+b.wide) {
-        a.note.stop();
-        b.note.stop();
-        return true;
-    }
+    if (a.destroyMe) return true;
     else return false;
     
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
+    
+    for (int i = 0; i < attacks.size(); i++) {
+        if (attacks[i].xPos > ofGetWidth() + attacks[i].handToPower) {
+            attacks[i].note.stop(); // Quit playing the attack's note (this may not be necessary, but just in case).
+            attacks[i].destroyMe = true;
+        }
+    }
+    
+    for (int i = 0; i < attacks.size(); i++) {
+        for (int j = 0; j < enemies.size(); j++) {
+            if (attacks[i].xPos > enemies[j].xPos+enemies[j].wide) {
+                attacks[i].note.stop();
+                enemies[j].note.stop();
+                attacks[i].destroyMe = true;
+                enemies[j].destroyMe = true;
+            }
+        }
+    }
+    
     
     player.update();
     
@@ -101,7 +112,7 @@ void testApp::update(){
     
     // Following up the boolean function we created above, this oF function sorts the vector according to the values of the booleans and then removes any with a 'true' value:
     ofRemove(attacks,bShouldIErase);
-    //ofRemove(enemies,bShouldIErase); // Not working.
+    ofRemove(enemies,bShouldIErase2);
     
 }
 

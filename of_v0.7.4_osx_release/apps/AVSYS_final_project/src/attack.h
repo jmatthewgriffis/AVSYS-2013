@@ -27,6 +27,7 @@ public:
     float attackSpacerMinimum; // Attacks are minimally spaced.
     bool iTossThePower; // Does the player toss the power?
     bool checkMoveRIGHT; // Is the player pressing Attack?
+    bool destroyMe;
     
     ofSoundPlayer note;
     
