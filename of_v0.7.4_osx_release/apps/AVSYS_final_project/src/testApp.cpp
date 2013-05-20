@@ -57,7 +57,7 @@ void testApp::update(){
     
     for (int i = 0; i < attacks.size(); i++) {
         for (int j = 0; j < enemies.size(); j++) {
-            if (attacks[i].xPos > enemies[j].xPos+enemies[j].wide) {
+            if (attacks[i].xPos > enemies[j].xPos+enemies[j].wide && attacks[i].yPos+attacks[i].tall > enemies[j].yPos && attacks[i].yPos < enemies[j].yPos+enemies[j].tall) {
                 attacks[i].note.stop();
                 enemies[j].note.stop();
                 attacks[i].destroyMe = true;
@@ -101,7 +101,7 @@ void testApp::update(){
         for (int j = 0; j < enemies.size(); j++) {
             attacks[i].note.setVolume(0.3f); // Default w/o collision.
             enemies[j].note.setVolume(0.3f); // Default w/o collision.
-            if (attacks[i].xPos+attacks[i].wide > enemies[j].xPos && attacks[i].xPos < enemies[j].xPos+enemies[j].wide) {
+            if (attacks[i].xPos+attacks[i].wide > enemies[j].xPos && attacks[i].xPos < enemies[j].xPos+enemies[j].wide && attacks[i].yPos+attacks[i].tall > enemies[j].yPos && attacks[i].yPos < enemies[j].yPos+enemies[j].tall) {
                 attacks[i].note.setVolume(1.0f);
                 enemies[j].note.setVolume(1.0f);
             }
