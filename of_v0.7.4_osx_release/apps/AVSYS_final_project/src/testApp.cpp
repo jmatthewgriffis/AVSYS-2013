@@ -48,6 +48,11 @@ bool bShouldIErase2(enemy & a){
 //--------------------------------------------------------------
 void testApp::update(){
     
+    /*if (enemies.size() == 0) {
+        enemy enemy;
+        enemy.setup();
+    }*/
+    
     for (int i = 0; i < attacks.size(); i++) {
         if (attacks[i].xPos > ofGetWidth() + attacks[i].handToPower) {
             attacks[i].note.stop(); // Quit playing the attack's note (this may not be necessary, but just in case).

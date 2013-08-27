@@ -15,7 +15,9 @@ void enemy::setup() {
     wide = 150;
     tall = wide/3;
     xPos = ofGetWidth()-wide-15;
-    yPos = ofGetHeight()-tall-15 - ((ofGetHeight()-(10*5))/6 + 10)*3;
+    yPosDefault = ofGetHeight()-tall-15;
+    yPosModifier = (ofGetHeight()-(10*5))/6 + 10;
+    yPos = yPosDefault - yPosModifier*3;
     // -= verticalSpacer + tallPlatform
     xVel = 0;
     

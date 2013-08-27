@@ -19,7 +19,7 @@ public:
     void update();
     void draw();
     
-    float xPos, yPos, wide, tall, xVel;
+    float xPos, yPos, yPosDefault, yPosModifier, wide, tall, xVel;
     int whichNote;
     bool destroyMe;
     
